@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>День Рождения Йогини</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #e0f7fa 0%, #fce4ec 100%);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+            color: #9c27b0;
+            margin-right: 15px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #6a1b9a;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8e24aa;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .nav-btn {
+            padding: 14px 32px;
+            background-color: #9c27b0;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-btn i {
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+            min-height: 500px;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #6a1b9a;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #555;
+        }
+        
+        .birthday-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            border: 8px solid #f3e5f5;
+        }
+        
+        .birthday-card h3 {
+            color: #9c27b0;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .birthday-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        /* Gallery Page */
+        .gallery-section {
+            margin-top: 50px;
+        }
+        
+        .year-divider {
+            text-align: center;
+            margin: 50px 0 30px;
+            position: relative;
+        }
+        
+        .year-divider:first-child {
+            margin-top: 30px;
+        }
+        
+        .year-divider h3 {
+            display: inline-block;
+            background-color: #9c27b0;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 4px solid #f3e5f5;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        /* Переделанные стили для контейнера с фото */
+        .photo-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+        
+        .photo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Рамка, которая адаптируется под размер фото */
+        .photo-frame {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 0; /* Важно для корректной работы flex */
+        }
+        
+        /* Контейнер для фото, который адаптируется под размер изображения */
+        .photo-placeholder {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            flex-grow: 1;
+            min-height: 250px; /* Минимальная высота, когда нет фото */
+        }
+        
+        /* Стили для реальных фотографий - ОСНОВНЫЕ ИЗМЕНЕНИЯ */
+        .photo-placeholder img {
+            width: 100%;
+            height: auto;
+            display: none;
+            object-fit: contain;
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        
+        /* Когда есть реальное фото */
+        .photo-container.has-photo .photo-placeholder {
+            min-height: 0;
+            height: auto;
+        }
+        
+        .photo-container.has-photo .photo-placeholder img {
+            display: block;
+        }
+        
+        .photo-container.has-photo .photo-placeholder i,
+        .photo-container.has-photo .photo-placeholder span {
+            display: none;
+        }
+        
+        .photo-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ce93d8;
+        }
+        
+        .photo-placeholder span {
+            font-size: 1rem;
+            padding: 0 15px;
+            text-align: center;
+        }
+        
+        /* Рамки для галереи - теперь рамка ВОКРУГ контейнера */
+        .gallery-grid .photo-container:nth-child(odd) {
+            border: 8px solid #f3e5f5;
+        }
+        
+        .gallery-grid .photo-container:nth-child(even) {
+            border: 8px solid #e1f5fe;
+        }
+        
+        /* Champion Page */
+        .champion-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .champion-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Контейнер для фото чемпиона */
+        .champion-photo-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border: 10px solid #f3e5f5;
+        }
+        
+        .champion-photo-frame {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .champion-photo {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-grow: 1;
+            min-height: 400px;
+        }
+        
+        /* Стили для фото чемпиона */
+        .champion-photo img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .champion-photo i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #9c27b0;
+        }
+        
+        .champion-photo span {
+            font-size: 1.1rem;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        /* Скрываем иконку и текст, когда есть фото */
+        .champion-photo-container.has-photo .champion-photo i,
+        .champion-photo-container.has-photo .champion-photo span {
+            display: none;
+        }
+        
+        .champion-photo-container.has-photo .champion-photo {
+            min-height: 0;
+        }
+        
+        .champion-info {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 8px solid #e1f5fe;
+        }
+        
+        .champion-info h3 {
+            color: #9c27b0;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .info-item {
+            margin-bottom: 25px;
+        }
+        
+        .info-item h4 {
+            color: #7b1fa2;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .info-item p {
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #f1f1f1;
+            padding: 30px 0;
+            text-align: center;
+            color: #777;
+            margin-top: 60px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border: 8px solid #f3e5f5;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+        }
+        
+        .footer-heart {
+            color: #e91e63;
+            font-size: 1.2rem;
+        }
+        
+        /* Адаптивность для разных размеров экрана */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-spa logo-icon"></i>
+                <h1>День Рождения Йогини</h1>
+            </div>
+            <p class="subtitle">Посвящается моей невероятной сестре</p>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn" id="homeBtn">
+                    <i class="fas fa-home"></i> Главная
+                </button>
+                <button class="nav-btn" id="galleryBtn">
+                    <i class="fas fa-images"></i> Галерея
+                </button>
+                <button class="nav-btn" id="championBtn">
+                    <i class="fas fa-trophy"></i> Чемпиониха
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <!-- Главная страница -->
+            <div id="homePage" class="page active">
+                <div class="hero">
+                    <h2>С Днём Рождения, дорогая сестра!</h2>
+                    <p>Этот сайт создан в честь твоего особенного дня и твоего удивительного пути в йоге</p>
+                    
+                    <div class="birthday-card">
+                        <h3>Моей любимой сестре-йогини</h3>
+                        <p>
+                            В этот прекрасный день я хочу поздравить тебя с днем рождения! 
+                            Ты не только моя сестра, но и вдохновляющий пример силы, гармонии и самопознания. 
+                            Твое увлечение йогой изменило не только твою жизнь, но и жизнь всех, кто тебя окружает.
+                        </p>
+                        <p>
+                            Пусть каждый новый день приносит тебе радость, внутренний покой и новые достижения 
+                            на твоем пути. Оставайся такой же сильной, мудрой и прекрасной!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Страница галереи -->
+            <div id="galleryPage" class="page">
+                <h1>Я ТЕБЯ ОЧЕНЬ ЛЮБЛЮ!!!</h1>
+                <h2>Галерея фотографий</h2>
+                <h3>Фотографии из жизни нашей чемпионки</h3>
+                
+                <div class="gallery-section">
+                    <!-- Фото 2026 года -->
+                    <div class="year-divider">
+                        <h3>2026</h3>
+                    </div>
+                    
+                    <div class="gallery-grid">
+                        <!-- Фото 1 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-2.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 2 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-3.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 3 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-4.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 4 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-5.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 5 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-6.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 6 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-7.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 7 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-8.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 8 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-9.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 9 (2026) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2026-10.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Фото 2013-2015 годов -->
+                    <div class="year-divider">
+                        <h3>2013-2015</h3>
+                    </div>
+                    
+                    <div class="gallery-grid">
+                        <!-- Фото 1 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 9.JPEG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 2 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 8.JPG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 3 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 7.jpg" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 4 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 6.JPG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 5 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 5.JPG" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 6 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 4.JPEG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 7 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 3.JPEG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 8 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 2.JPEG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Фото 9 (2013-2015) -->
+                        <div class="photo-container">
+                            <div class="photo-frame">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <img src="систр 1.JPEG" alt="систр">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Страница чемпионки -->
+            <div id="championPage" class="page">
+                <h2>Наша Любимая Чундра-Катюньдель</h2>
+                <p>Страница посвящена достижениям и увлечению йогой вашей сестры</p>
+                
+                <div class="champion-content">
+                    <div class="champion-photo-container has-photo">
+                        <div class="champion-photo-frame">
+                            <div class="champion-photo">
+                                <img src="систр 2026-1.jpg" alt="мими-систр">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="champion-info">
+                        <h3>Достижения</h3>
+                        
+                        <div class="info-item">
+                            <h4>Область специализации</h4>
+                            <p>FYSM, Data scence, Languages, Psychology etc.</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Сертификаты и награды</h4>
+                            <p>Множество грамот, грантов различных стран. Правительственные награды.</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Опыт практики</h4>
+                            <p>24 года непрерывного опыта во всех областях.</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Личные качества</h4>
+                            <p>Доброта, красота, интеллект, коммуникабельность, целеустремленность, бесстрашие, эмоциональность, нежность, смекалка, находчивость и...</p>
+                            <h1>ЛЮБИМАЯ СЕСТРА!!!</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Сайт создан с <span class="footer-heart">❤</span> в честь дня рождения моей сестры-йогини</p>
+            <p>© <span id="currentYear"></span> День Рождения Йогини. Все права защищены.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Навигация по страницам
+        document.getElementById('homeBtn').addEventListener('click', function() {
+            showPage('homePage');
+        });
+        
+        document.getElementById('galleryBtn').addEventListener('click', function() {
+            showPage('galleryPage');
+        });
+        
+        document.getElementById('championBtn').addEventListener('click', function() {
+            showPage('championPage');
+        });
+        
+        function showPage(pageId) {
+            // Скрыть все страницы
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показать выбранную страницу
+            document.getElementById(pageId).classList.add('active');
+            
+            // Обновить активность кнопок
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.style.backgroundColor = '#9c27b0';
+            });
+            
+            // Подсветить активную кнопку
+            if (pageId === 'homePage') {
+                document.getElementById('homeBtn').style.backgroundColor = '#7b1fa2';
+            } else if (pageId === 'galleryPage') {
+                document.getElementById('galleryBtn').style.backgroundColor = '#7b1fa2';
+            } else if (pageId === 'championPage') {
+                document.getElementById('championBtn').style.backgroundColor = '#7b1fa2';
+            }
+        }
+        
+        // Установить текущий год в футере
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Автоматическое добавление класса has-photo для контейнеров с фото
+        document.addEventListener('DOMContentLoaded', function() {
+            // Для галереи
+            const photoContainers = document.querySelectorAll('.photo-container');
+            photoContainers.forEach(container => {
+                const img = container.querySelector('img');
+                if (img && img.src) {
+                    container.classList.add('has-photo');
+                }
+            });
+            
+            // Для фото чемпиона
+            const championContainer = document.querySelector('.champion-photo-container');
+            const championImg = championContainer.querySelector('img');
+            if (championImg && championImg.src) {
+                championContainer.classList.add('has-photo');
+            }
+            
+            // Функция для добавления фото в галерею
+            window.addPhotoToGallery = function(photoIndex, imgSrc, altText) {
+                const placeholder = document.querySelectorAll('.photo-placeholder')[photoIndex];
+                if (placeholder) {
+                    // Удаляем иконку и текст
+                    const icon = placeholder.querySelector('i');
+                    const text = placeholder.querySelector('span');
+                    if (icon) icon.style.display = 'none';
+                    if (text) text.style.display = 'none';
+                    
+                    // Создаем и добавляем изображение
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = altText || `Фото ${photoIndex + 1}`;
+                    placeholder.appendChild(img);
+                    
+                    // Добавляем класс контейнеру
+                    placeholder.closest('.photo-container').classList.add('has-photo');
+                }
+            };
+            
+            // Пример использования (раскомментируйте для теста):
+            // addPhotoToGallery(0, 'систр 2026-1.jpg', 'Моя сестра в йоге');
+        });
+    </script>
+</body>
+</html>
